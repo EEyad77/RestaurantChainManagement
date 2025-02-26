@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="Controllers\Locations\" />
     <Folder Include="Controllers\Menu\" />
-    <Folder Include="Models\Locations\" />
-    <Folder Include="Models\Menu\" />
     <Folder Include="Data\" />
     <Folder Include="Views\Locations\" />
     <Folder Include="Views\Menu\" />

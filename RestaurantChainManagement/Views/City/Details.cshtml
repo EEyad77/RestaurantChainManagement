@@ -1,0 +1,28 @@
+﻿@model RestaurantChainManagement.Models.City
+@{
+    ViewData["Title"] = "Branch Details";
+}
+<h1>@Model.Name</h1>
+<p>
+    State: @Model.State?.Name <br />
+    Country: @Model.State?.Country?.Name
+</p>
+<p>
+    Branch Picture:
+    @if (!string.IsNullOrEmpty(Model.BranchPicturePath))
+    {
+        <img src="@Url.Content(Model.BranchPicturePath)" alt="Branch Picture" style="max-height:200px;" />
+    }
+    else
+    {
+        <span>No picture uploaded.</span>
+    }
+</p>
+<form asp-action="UploadPicture" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="form-group">
+        <label>Upload Picture (jpg, jpeg):</label>
+        <input type="file" name="picture" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<RestaurantChainManagement.Models.Country>
+@{
+    ViewData["Title"] = "Restaurant Locations";
+}
+<h1>Restaurant Locations</h1>
+<ul>
+    @foreach (var country in Model)
+    {
+        <li>
+            <a asp-action="Details" asp-route-id="@country.Id">@country.Name</a>
+        </li>
+    }
+</ul>

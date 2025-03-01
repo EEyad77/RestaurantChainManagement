@@ -1,0 +1,58 @@
+﻿@model RestaurantChainManagement.ViewModels.CountryViewModel
+
+@{
+    ViewData["Title"] = "Edit Country";
+}
+
+<h1>Edit Country</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <!-- Hidden field for the country ID -->
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="CountryName" class="control-label"></label>
+        <input asp-for="CountryName" class="form-control" />
+        <span asp-validation-for="CountryName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FlagPath" class="control-label">Flag Image Path</label>
+        <input asp-for="FlagPath" class="form-control" />
+        <span asp-validation-for="FlagPath" class="text-danger"></span>
+    </div>
+
+    <hr />
+    <h3>States and Cities</h3>
+    <div id="states">
+        @for (int i = 0; i < Model.States.Count; i++)
+        {
+            <div class="border p-3 mb-3">
+                <h4>State @(i + 1)</h4>
+                <div class="form-group">
+                    <label asp-for="States[@i].StateName" class="control-label"></label>
+                    <input asp-for="States[@i].StateName" class="form-control" />
+                    <span asp-validation-for="States[@i].StateName" class="text-danger"></span>
+                </div>
+                <h5>Cities</h5>
+                @for (int j = 0; j < Model.States[i].Cities.Count; j++)
+                {
+                    <div class="form-group">
+                        <label asp-for="States[@i].Cities[@j].CityName" class="control-label"></label>
+                        <input asp-for="States[@i].Cities[@j].CityName" class="form-control" />
+                        <span asp-validation-for="States[@i].Cities[@j].CityName" class="text-danger"></span>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

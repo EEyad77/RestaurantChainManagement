@@ -1,0 +1,36 @@
+﻿@model IEnumerable<RestaurantChainManagement.Models.Country>
+@{
+    ViewData["Title"] = "Manage Countries";
+}
+<h1>Manage Countries</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Country</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Name)</th>
+            <th>Flag</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>@country.Name</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(country.FlagPath))
+                    {
+                        <img src="@Url.Content(country.FlagPath)" alt="Flag" style="max-height:50px;" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@country.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@country.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@country.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

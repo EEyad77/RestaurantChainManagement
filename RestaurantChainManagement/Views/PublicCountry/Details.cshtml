@@ -1,0 +1,35 @@
+﻿@model RestaurantChainManagement.Models.Country
+@{
+    ViewData["Title"] = "Country Details";
+}
+<h1>@Model.Name</h1>
+<p>
+    @if (!string.IsNullOrEmpty(Model.FlagPath))
+    {
+        <img src="@Url.Content(Model.FlagPath)" alt="Flag" style="max-height:100px;" />
+    }
+</p>
+<h3>States and Cities</h3>
+@if (Model.States != null && Model.States.Any())
+{
+    <ul>
+        @foreach (var state in Model.States)
+        {
+            <li>
+                <strong>@state.Name</strong>
+                <ul>
+                    @foreach (var city in state.Cities)
+                    {
+                        <li>
+                            @city.Name - <a asp-controller="City" asp-action="Details" asp-route-id="@city.Id">View Branch</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No location details available.</p>
+}
